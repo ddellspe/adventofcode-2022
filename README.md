@@ -13,3 +13,4 @@ Completion Statistics:
 
 |Day|Part 1 Time|Part 1 Rank|Part 2 Time|Part 2 Rank|Blog Post|
 |-|-|-|-|-|-|
+|01|00:05:01|2656|00:10:33|3828||

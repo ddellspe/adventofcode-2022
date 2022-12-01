@@ -7,7 +7,12 @@ import org.junit.jupiter.api.Test;
 public class Day01Test {
   @Test
   public void providedInputTestPart1() {
-    assertEquals(0L, Day01.part1("example.txt"));
+    assertEquals(24000L, Day01.part1("example.txt"));
+  }
+
+  @Test
+  public void providedInputTestPart1Coverage() {
+    assertEquals(30000L, Day01.part1("example2.txt"));
   }
 
   @Test
@@ -17,7 +22,7 @@ public class Day01Test {
 
   @Test
   public void providedInputTestPart2() {
-    assertEquals(0L, Day01.part2("example.txt"));
+    assertEquals(45000L, Day01.part2("example.txt"));
   }
 
   @Test
