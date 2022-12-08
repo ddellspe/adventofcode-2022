@@ -11,7 +11,7 @@ import net.ddellspe.utils.InputUtils;
 public class Day05 {
   public static final Pattern PARSER = Pattern.compile("move (\\d+) from (\\d+) to (\\d+)");
 
-  Day05() {}
+  private Day05() {}
 
   public static String part1(String filename) {
     List<String> lines = InputUtils.stringPerLine(filename, Day05.class);
