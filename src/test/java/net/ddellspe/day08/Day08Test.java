@@ -9,7 +9,7 @@ public class Day08Test {
 
   @Test
   public void providedInputTestPart1() {
-    assertEquals(0L, Day08.part1("example.txt"));
+    assertEquals(21L, Day08.part1("example.txt"));
   }
 
   @Test
@@ -19,7 +19,7 @@ public class Day08Test {
 
   @Test
   public void providedInputTestPart2() {
-    assertEquals(0L, Day08.part2("example.txt"));
+    assertEquals(8L, Day08.part2("example.txt"));
   }
 
   @Test
