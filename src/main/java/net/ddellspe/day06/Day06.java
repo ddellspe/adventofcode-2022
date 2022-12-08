@@ -4,7 +4,7 @@ import java.util.List;
 import net.ddellspe.utils.InputUtils;
 
 public class Day06 {
-  Day06() {}
+  private Day06() {}
 
   public static long part1(String filename) {
     List<String> lines = InputUtils.stringPerLine(filename, Day06.class);

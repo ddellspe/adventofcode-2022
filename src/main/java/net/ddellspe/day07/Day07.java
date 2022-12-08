@@ -11,7 +11,7 @@ import net.ddellspe.utils.InputUtils;
 public class Day07 {
   static Pattern FILE_PATTERN = Pattern.compile("(\\d+) (.+)");
 
-  Day07() {}
+  private Day07() {}
 
   public static long part1(String filename) {
     List<String> lines = InputUtils.stringPerLine(filename, Day07.class);
