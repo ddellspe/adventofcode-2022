@@ -33,10 +33,7 @@ public class Day04 {
       int r1high = Integer.parseInt(range1.split("-")[1]);
       int r2low = Integer.parseInt(range2.split("-")[0]);
       int r2high = Integer.parseInt(range2.split("-")[1]);
-      if (r2high >= r1low && r2high <= r1high
-          || r2low >= r1low && r2low <= r1high
-          || r1high >= r2low && r1high <= r2high
-          || r1low >= r2low && r1low <= r2high) {
+      if (r2low >= r1low && r2low <= r1high || r1low >= r2low && r1low <= r2high) {
         count += 1L;
       }
     }

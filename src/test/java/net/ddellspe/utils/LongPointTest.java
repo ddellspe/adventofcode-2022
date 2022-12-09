@@ -2,6 +2,7 @@ package net.ddellspe.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,9 @@ public class LongPointTest {
     assertEquals(orig, orig);
     //noinspection SimplifiableAssertion, ConstantConditions
     assertFalse(orig.equals(null));
+    assertFalse(orig.equals(""));
+    assertNotEquals(orig, new LongPoint(10, 21));
+    assertNotEquals(orig, new LongPoint(11, 20));
     assertEquals("LongPoint [x=10, y=20]", orig.toString());
   }
 

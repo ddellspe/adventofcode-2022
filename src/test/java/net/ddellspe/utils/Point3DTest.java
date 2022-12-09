@@ -2,6 +2,7 @@ package net.ddellspe.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,10 @@ public class Point3DTest {
     assertEquals(orig, orig);
     //noinspection SimplifiableAssertion, ConstantConditions
     assertFalse(orig.equals(null));
+    assertFalse(orig.equals(""));
+    assertNotEquals(orig, new Point3D(10, 20, 31));
+    assertNotEquals(orig, new Point3D(10, 21, 30));
+    assertNotEquals(orig, new Point3D(11, 20, 30));
     assertEquals("Point3D [x=10, y=20, z=30]", orig.toString());
   }
 

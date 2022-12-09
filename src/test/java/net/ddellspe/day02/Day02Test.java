@@ -45,6 +45,11 @@ public class Day02Test {
   }
 
   @Test
+  public void providedInputTestPart1InvalidOpponent() {
+    assertEquals(0L, Day02.part1("example5.txt"));
+  }
+
+  @Test
   public void solutionPart1() {
     System.out.println("Day 02 Part 1 Answer is: " + Day02.part1("input.txt"));
   }
@@ -90,5 +95,10 @@ public class Day02Test {
               Day02.part2("example4.txt");
             });
     assertEquals("Invalid choice: C", exception.getMessage());
+  }
+
+  @Test
+  public void providedInputTestPart2InvalidOpponent() {
+    assertEquals(0L, Day02.part2("example5.txt"));
   }
 }
