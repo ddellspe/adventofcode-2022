@@ -1,6 +1,7 @@
 package net.ddellspe.day05;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import net.ddellspe.day05.Day05.Move;
@@ -44,12 +45,16 @@ public class Day05Test {
     assertEquals(2, move.getSource());
     assertEquals(3, move.getDest());
 
-    Move move2 = new Move("move 1 from 2 to 3");
-    assertEquals(move2, move);
+    Move actual = new Move("move 1 from 2 to 3");
+    assertEquals(actual, move);
     assertEquals(move, move);
-    assertEquals(move2.hashCode(), move.hashCode());
+    assertEquals(actual.hashCode(), move.hashCode());
     assertNotEquals(move, new Move("blah"));
-    assertNotEquals(move, "move");
+    assertFalse(move.equals("move"));
+    assertFalse(move.equals(null));
+    assertFalse(move.equals(new Move("move 1 from 2 to 4")));
+    assertFalse(move.equals(new Move("move 1 from 4 to 3")));
+    assertFalse(move.equals(new Move("move 2 from 2 to 3")));
     assertEquals("Move{count=1, source=2, dest=3}", move.toString());
   }
 }

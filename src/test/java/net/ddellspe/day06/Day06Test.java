@@ -33,6 +33,11 @@ public class Day06Test {
   }
 
   @Test
+  public void providedInputTestPart1Test6() {
+    assertEquals(4L, Day06.part1("example6.txt"));
+  }
+
+  @Test
   public void solutionPart1() {
     System.out.println("Day 06 Part 1 Answer is: " + Day06.part1("input.txt"));
   }
@@ -60,6 +65,11 @@ public class Day06Test {
   @Test
   public void providedInputTestPart2Test5() {
     assertEquals(26L, Day06.part2("example5.txt"));
+  }
+
+  @Test
+  public void providedInputTestPart2Test6() {
+    assertEquals(14L, Day06.part2("example6.txt"));
   }
 
   @Test

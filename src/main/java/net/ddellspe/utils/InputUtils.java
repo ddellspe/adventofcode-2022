@@ -3,11 +3,44 @@ package net.ddellspe.utils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class InputUtils {
+  private InputUtils() {}
+
+  public static Map<Point, String> pointStringMap(String filename, Class klass) {
+    List<String> lines = stringPerLine(filename, klass);
+    Map<Point, String> points = new LinkedHashMap<>();
+    for (int i = 0; i < lines.size(); i++) {
+      for (int j = 0; j < lines.get(i).length(); j++) {
+        points.put(new Point(j, i), String.valueOf(lines.get(i).charAt(j)));
+      }
+    }
+    return points;
+  }
+
+  public static int maxX(Collection<Point> pointMap) {
+    return pointMap.stream().map(Point::getX).max(Comparator.naturalOrder()).get();
+  }
+
+  public static int maxY(Collection<Point> pointMap) {
+    return pointMap.stream().map(Point::getY).max(Comparator.naturalOrder()).get();
+  }
+
+  public static int minX(Collection<Point> pointMap) {
+    return pointMap.stream().map(Point::getX).min(Comparator.naturalOrder()).get();
+  }
+
+  public static int minY(Collection<Point> pointMap) {
+    return pointMap.stream().map(Point::getY).min(Comparator.naturalOrder()).get();
+  }
+
   public static List<Integer> numberPerLine(String filename, Class klass) {
     BufferedReader reader =
         new BufferedReader(
