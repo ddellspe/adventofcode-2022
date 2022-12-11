@@ -22,7 +22,7 @@ public class Day10 {
       }
       if ("noop".equals(line)) {
         cyclesToAdd = 1;
-      } else if (line.startsWith("addx") && cyclesToAdd == 0) {
+      } else if (cyclesToAdd == 0) {
         cyclesToAdd = 2;
       }
       if ((cycle - 20) % 40 == 0) {
@@ -55,7 +55,7 @@ public class Day10 {
       }
       if ("noop".equals(line)) {
         cyclesToAdd = 1;
-      } else if (line.startsWith("addx") && cyclesToAdd == 0) {
+      } else if (cyclesToAdd == 0) {
         cyclesToAdd = 2;
       }
       if ((cycle % 40) < spriteStartPosition || (cycle % 40) >= (spriteStartPosition + 3)) {
