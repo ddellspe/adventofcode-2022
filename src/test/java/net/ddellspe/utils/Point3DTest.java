@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 public class Point3DTest {
@@ -57,5 +59,39 @@ public class Point3DTest {
     for (int i = 0; i < differences.size(); i++) {
       assertEquals(pt1, pt2.getPointWithDiff(differences.get(i), i));
     }
+  }
+
+  @Test
+  public void testNeighbors() {
+    Point3D orig = new Point3D(10, 20, 30);
+    Set<Point3D> neighbors = new HashSet<>();
+    neighbors.add(new Point3D(9, 20, 30));
+    neighbors.add(new Point3D(11, 20, 30));
+    neighbors.add(new Point3D(10, 19, 30));
+    neighbors.add(new Point3D(10, 21, 30));
+    neighbors.add(new Point3D(10, 20, 29));
+    neighbors.add(new Point3D(10, 20, 31));
+    assertEquals(neighbors, orig.getDirectNeighbors());
+    neighbors.add(new Point3D(9, 19, 29));
+    neighbors.add(new Point3D(9, 19, 30));
+    neighbors.add(new Point3D(9, 19, 31));
+    neighbors.add(new Point3D(9, 20, 29));
+    neighbors.add(new Point3D(9, 20, 31));
+    neighbors.add(new Point3D(9, 21, 29));
+    neighbors.add(new Point3D(9, 21, 30));
+    neighbors.add(new Point3D(9, 21, 31));
+    neighbors.add(new Point3D(10, 19, 29));
+    neighbors.add(new Point3D(10, 19, 31));
+    neighbors.add(new Point3D(10, 21, 29));
+    neighbors.add(new Point3D(10, 21, 31));
+    neighbors.add(new Point3D(11, 19, 29));
+    neighbors.add(new Point3D(11, 19, 30));
+    neighbors.add(new Point3D(11, 19, 31));
+    neighbors.add(new Point3D(11, 20, 29));
+    neighbors.add(new Point3D(11, 20, 31));
+    neighbors.add(new Point3D(11, 21, 29));
+    neighbors.add(new Point3D(11, 21, 30));
+    neighbors.add(new Point3D(11, 21, 31));
+    assertEquals(neighbors, orig.getAllNeighbors());
   }
 }
