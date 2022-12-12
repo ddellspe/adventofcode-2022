@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 public class PointTest {
@@ -36,5 +38,16 @@ public class PointTest {
     Point orig = new Point(10, 20);
     assertEquals(10, orig.getX());
     assertEquals(20, orig.getY());
+    Set<Point> neighbors = new HashSet<>();
+    neighbors.add(new Point(9, 20));
+    neighbors.add(new Point(11, 20));
+    neighbors.add(new Point(10, 21));
+    neighbors.add(new Point(10, 19));
+    assertEquals(neighbors, orig.getDirectNeighbors());
+    neighbors.add(new Point(9, 19));
+    neighbors.add(new Point(9, 21));
+    neighbors.add(new Point(11, 19));
+    neighbors.add(new Point(11, 21));
+    assertEquals(neighbors, orig.getAllNeighbors());
   }
 }
