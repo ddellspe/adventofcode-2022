@@ -1,8 +1,10 @@
 package net.ddellspe.utils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Point3D {
   private int x;
@@ -129,6 +131,35 @@ public class Point3D {
 
   public long manhattanDistance(Point3D pt2) {
     return Math.abs(x - pt2.getX()) + Math.abs(y - pt2.getY()) + Math.abs(z - pt2.getZ());
+  }
+
+  public Set<Point3D> getDirectNeighbors() {
+    Set<Point3D> points = new HashSet<>();
+    for (int x = -1; x <= 1; x++) {
+      for (int y = -1; y <= 1; y++) {
+        for (int z = -1; z <= 1; z++) {
+          if (Math.abs(x) + Math.abs(y) + Math.abs(z) == 1) {
+            points.add(new Point3D(this.x + x, this.y + y, this.z + z));
+          }
+        }
+      }
+    }
+    return points;
+  }
+
+  public Set<Point3D> getAllNeighbors() {
+    Set<Point3D> points = new HashSet<>();
+    for (int x = -1; x <= 1; x++) {
+      for (int y = -1; y <= 1; y++) {
+        for (int z = -1; z <= 1; z++) {
+          if (x == 0 && y == 0 && z == 0) {
+            continue;
+          }
+          points.add(new Point3D(this.x + x, this.y + y, this.z + z));
+        }
+      }
+    }
+    return points;
   }
 
   @Override
