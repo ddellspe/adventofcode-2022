@@ -1,6 +1,8 @@
 package net.ddellspe.utils;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Point {
   private int x;
@@ -21,6 +23,28 @@ public class Point {
     }
     Point point = (Point) o;
     return x == point.x && y == point.y;
+  }
+
+  public Set<Point> getDirectNeighbors() {
+    Set<Point> points = new HashSet<>();
+    points.add(new Point(x + 1, y));
+    points.add(new Point(x - 1, y));
+    points.add(new Point(x, y + 1));
+    points.add(new Point(x, y - 1));
+    return points;
+  }
+
+  public Set<Point> getAllNeighbors() {
+    Set<Point> points = new HashSet<>();
+    points.add(new Point(x + 1, y + 1));
+    points.add(new Point(x + 1, y));
+    points.add(new Point(x + 1, y - 1));
+    points.add(new Point(x, y + 1));
+    points.add(new Point(x, y - 1));
+    points.add(new Point(x - 1, y + 1));
+    points.add(new Point(x - 1, y));
+    points.add(new Point(x - 1, y - 1));
+    return points;
   }
 
   public int getX() {

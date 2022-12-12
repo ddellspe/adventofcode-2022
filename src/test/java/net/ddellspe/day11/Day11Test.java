@@ -3,6 +3,7 @@ package net.ddellspe.day11;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import net.ddellspe.day11.Day11.Monkey;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Day11Test {
@@ -10,7 +11,7 @@ public class Day11Test {
 
   @Test
   public void providedInputTestPart1() {
-    assertEquals(10605L, Day11.part1("example.txt"));
+    Assertions.assertEquals(10605L, Day11.part1("example.txt"));
   }
 
   @Test
