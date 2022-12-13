@@ -1,6 +1,7 @@
 package net.ddellspe.day13;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -36,5 +37,7 @@ public class Day13Test {
     Packet packetOne = new Packet(new ArrayList<>(), 5L);
     Packet packetTwo = new Packet(new ArrayList<>(), 5L);
     assertTrue(packetOne.equals(packetTwo));
+    assertFalse(packetOne.equals(null));
+    assertFalse(packetOne.equals(""));
   }
 }

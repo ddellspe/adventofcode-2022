@@ -1,6 +1,7 @@
 package net.ddellspe.day13;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import net.ddellspe.utils.InputUtils;
@@ -19,7 +20,7 @@ public class Day13 {
     }
     long sum = 0L;
     for (int index = 0; index < packets.size() / 2; index++) {
-      if (packets.get(index * 2).compareTo(packets.get(index * 2 + 1)) == 1) {
+      if (packets.get(index * 2).compareTo(packets.get(index * 2 + 1)) < 0) {
         sum += index + 1L;
       }
     }
@@ -39,7 +40,7 @@ public class Day13 {
     Packet indTwo = new Packet("[[6]]");
     packets.add(indOne);
     packets.add(indTwo);
-    packets.sort(Packet::compareToReverse);
+    Collections.sort(packets);
     long product = 1L;
     for (int i = 0; i < packets.size(); i++) {
       if (packets.get(i).equals(indOne) || packets.get(i).equals(indTwo)) {
@@ -57,6 +58,9 @@ public class Day13 {
     public boolean equals(Object o) {
       if (this == o) {
         return true;
+      }
+      if (o == null || this.getClass() != o.getClass()) {
+        return false;
       }
       Packet packet = (Packet) o;
       return Objects.equals(packetList, packet.packetList) && Objects.equals(value, packet.value);
@@ -115,9 +119,9 @@ public class Day13 {
         if (right.packetList != null) {
           for (int i = 0; i < Math.max(packetList.size(), right.packetList.size()); i++) {
             if (packetList.size() < (i + 1)) {
-              return 1;
-            } else if (right.packetList.size() < (i + 1)) {
               return -1;
+            } else if (right.packetList.size() < (i + 1)) {
+              return 1;
             } else {
               int comp = packetList.get(i).compareTo(right.packetList.get(i));
               if (comp == 0) {
@@ -133,14 +137,10 @@ public class Day13 {
         if (right.packetList != null) {
           return new Packet(this).compareTo(right);
         } else {
-          return value.compareTo(right.value) * -1;
+          return value.compareTo(right.value);
         }
       }
       return 0;
-    }
-
-    public int compareToReverse(Packet right) {
-      return this.compareTo(right) * -1;
     }
 
     @Override
