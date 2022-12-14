@@ -3,6 +3,7 @@ package net.ddellspe.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,5 +50,41 @@ public class PointTest {
     neighbors.add(new Point(11, 19));
     neighbors.add(new Point(11, 21));
     assertEquals(neighbors, orig.getAllNeighbors());
+  }
+
+  @Test
+  public void testPointsBetween() {
+    Point pt1 = new Point(0, 0);
+    Point pt2 = new Point(0, 2);
+    Set<Point> pointsBetween = new HashSet<>();
+    for (int i = 0; i <= 2; i++) {
+      pointsBetween.add(new Point(0, i));
+    }
+    assertEquals(pointsBetween, pt1.getPointsBetween(pt2));
+    pt2 = new Point(2, 0);
+    pointsBetween.clear();
+    for (int i = 0; i <= 2; i++) {
+      pointsBetween.add(new Point(i, 0));
+    }
+    assertEquals(pointsBetween, pt1.getPointsBetween(pt2));
+    pt2 = new Point(-2, 0);
+    pointsBetween.clear();
+    for (int i = -2; i <= 0; i++) {
+      pointsBetween.add(new Point(i, 0));
+    }
+    assertEquals(pointsBetween, pt1.getPointsBetween(pt2));
+    pt2 = new Point(0, -2);
+    pointsBetween.clear();
+    for (int i = -2; i <= 0; i++) {
+      pointsBetween.add(new Point(0, i));
+    }
+    assertEquals(pointsBetween, pt1.getPointsBetween(pt2));
+    IllegalStateException exception =
+        assertThrows(
+            IllegalStateException.class,
+            () -> {
+              pt1.getPointsBetween(new Point(2, 2));
+            });
+    assertEquals("Points must either share an X or Y coordinate", exception.getMessage());
   }
 }
