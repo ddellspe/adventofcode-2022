@@ -13,6 +13,11 @@ public class Point {
     this.y = y;
   }
 
+  public Point(String point) {
+    this.x = Integer.parseInt(point.split(",")[0]);
+    this.y = Integer.parseInt(point.split(",")[1]);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -23,6 +28,33 @@ public class Point {
     }
     Point point = (Point) o;
     return x == point.x && y == point.y;
+  }
+
+  public Set<Point> getPointsBetween(Point point) {
+    if (this.x != point.x && this.y != point.y) {
+      throw new IllegalStateException("Points must either share an X or Y coordinate");
+    }
+    Set<Point> pointsBetween = new HashSet<>();
+    if (this.x < point.x) {
+      for (int x = this.x; x <= point.x; x++) {
+        pointsBetween.add(new Point(x, this.y));
+      }
+    } else if (this.x > point.x) {
+      for (int x = point.x; x <= this.x; x++) {
+        pointsBetween.add(new Point(x, this.y));
+      }
+    } else {
+      if (this.y < point.y) {
+        for (int y = this.y; y <= point.y; y++) {
+          pointsBetween.add(new Point(this.x, y));
+        }
+      } else {
+        for (int y = point.y; y <= this.y; y++) {
+          pointsBetween.add(new Point(this.x, y));
+        }
+      }
+    }
+    return pointsBetween;
   }
 
   public Set<Point> getDirectNeighbors() {
