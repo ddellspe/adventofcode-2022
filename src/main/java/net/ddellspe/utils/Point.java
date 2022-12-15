@@ -57,6 +57,25 @@ public class Point {
     return pointsBetween;
   }
 
+  public int getManhattanDistance(Point point) {
+    return (Math.abs(this.x - point.x) + Math.abs(this.y - point.y));
+  }
+
+  public Set<Point> generatePointsAtManhattanDistance(int distance) {
+    Set<Point> points = new HashSet<>();
+    for (int deltaX = 0; deltaX <= distance; deltaX++) {
+      for (int deltaY = 0; deltaY <= distance; deltaY++) {
+        if (deltaX + deltaY <= distance) {
+          points.add(new Point(x + deltaX, y + deltaY));
+          points.add(new Point(x + deltaX, y - deltaY));
+          points.add(new Point(x - deltaX, y + deltaY));
+          points.add(new Point(x - deltaX, y - deltaY));
+        }
+      }
+    }
+    return points;
+  }
+
   public Set<Point> getDirectNeighbors() {
     Set<Point> points = new HashSet<>();
     points.add(new Point(x + 1, y));
