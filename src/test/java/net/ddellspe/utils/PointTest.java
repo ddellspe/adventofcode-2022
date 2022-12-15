@@ -87,4 +87,37 @@ public class PointTest {
             });
     assertEquals("Points must either share an X or Y coordinate", exception.getMessage());
   }
+
+  @Test
+  public void testPointsGenerationManhattanDistance() {
+    assertEquals(2, new Point(0, 0).getManhattanDistance(new Point(1, 1)));
+
+    Set<Point> expectedPoints = new HashSet<>();
+    expectedPoints.add(new Point(-3, 0));
+    expectedPoints.add(new Point(-2, -1));
+    expectedPoints.add(new Point(-2, 0));
+    expectedPoints.add(new Point(-2, 1));
+    expectedPoints.add(new Point(-1, -2));
+    expectedPoints.add(new Point(-1, -1));
+    expectedPoints.add(new Point(-1, 0));
+    expectedPoints.add(new Point(-1, 1));
+    expectedPoints.add(new Point(-1, 2));
+    expectedPoints.add(new Point(0, -3));
+    expectedPoints.add(new Point(0, -2));
+    expectedPoints.add(new Point(0, -1));
+    expectedPoints.add(new Point(0, 0));
+    expectedPoints.add(new Point(0, 1));
+    expectedPoints.add(new Point(0, 2));
+    expectedPoints.add(new Point(0, 3));
+    expectedPoints.add(new Point(1, -2));
+    expectedPoints.add(new Point(1, -1));
+    expectedPoints.add(new Point(1, 0));
+    expectedPoints.add(new Point(1, 1));
+    expectedPoints.add(new Point(1, 2));
+    expectedPoints.add(new Point(2, -1));
+    expectedPoints.add(new Point(2, 0));
+    expectedPoints.add(new Point(2, 1));
+    expectedPoints.add(new Point(3, 0));
+    assertEquals(expectedPoints, new Point(0, 0).generatePointsAtManhattanDistance(3));
+  }
 }
