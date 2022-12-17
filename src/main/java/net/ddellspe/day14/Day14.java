@@ -26,7 +26,7 @@ public class Day14 {
         prevPoint = point;
       }
     }
-    int yMax = rocks.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get();
+    long yMax = rocks.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get();
     Set<Point> sand = new HashSet<>(rocks);
     Point origin = new Point(500, 0);
     Point newSand = placeSand(sand, origin, yMax);
@@ -54,7 +54,7 @@ public class Day14 {
         prevPoint = point;
       }
     }
-    int yMax = rocks.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get() + 2;
+    long yMax = rocks.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get() + 2;
     for (int x = -500; x <= 1500; x++) {
       rocks.add(new Point(x, yMax));
     }
@@ -70,12 +70,12 @@ public class Day14 {
     return sand.size();
   }
 
-  public static Point placeSand(Set<Point> sand, Point origin, int yMax) {
+  public static Point placeSand(Set<Point> sand, Point origin, long yMax) {
     if (origin.getY() >= yMax || sand.contains(origin)) {
       return null;
     }
-    int x = origin.getX();
-    Optional<Integer> lastY =
+    long x = origin.getX();
+    Optional<Long> lastY =
         sand.stream()
             .filter(pt -> pt.getX() == origin.getX() && pt.getY() >= origin.getY())
             .map(Point::getY)
@@ -84,7 +84,7 @@ public class Day14 {
     if (lastY.isEmpty()) {
       return null;
     }
-    int y = lastY.get() - 1;
+    long y = lastY.get() - 1;
     if (sand.contains(new Point(x - 1, y + 1))) {
       if (sand.contains(new Point(x + 1, y + 1))) {
         return new Point(x, y);

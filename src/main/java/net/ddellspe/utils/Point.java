@@ -5,10 +5,10 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Point {
-  private int x;
-  private int y;
+  private long x;
+  private long y;
 
-  public Point(int x, int y) {
+  public Point(long x, long y) {
     this.x = x;
     this.y = y;
   }
@@ -36,20 +36,20 @@ public class Point {
     }
     Set<Point> pointsBetween = new HashSet<>();
     if (this.x < point.x) {
-      for (int x = this.x; x <= point.x; x++) {
+      for (long x = this.x; x <= point.x; x++) {
         pointsBetween.add(new Point(x, this.y));
       }
     } else if (this.x > point.x) {
-      for (int x = point.x; x <= this.x; x++) {
+      for (long x = point.x; x <= this.x; x++) {
         pointsBetween.add(new Point(x, this.y));
       }
     } else {
       if (this.y < point.y) {
-        for (int y = this.y; y <= point.y; y++) {
+        for (long y = this.y; y <= point.y; y++) {
           pointsBetween.add(new Point(this.x, y));
         }
       } else {
-        for (int y = point.y; y <= this.y; y++) {
+        for (long y = point.y; y <= this.y; y++) {
           pointsBetween.add(new Point(this.x, y));
         }
       }
@@ -57,7 +57,7 @@ public class Point {
     return pointsBetween;
   }
 
-  public int getManhattanDistance(Point point) {
+  public long getManhattanDistance(Point point) {
     return (Math.abs(this.x - point.x) + Math.abs(this.y - point.y));
   }
 
@@ -98,11 +98,11 @@ public class Point {
     return points;
   }
 
-  public int getX() {
+  public long getX() {
     return x;
   }
 
-  public int getY() {
+  public long getY() {
     return y;
   }
 
