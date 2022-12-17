@@ -25,19 +25,19 @@ public class InputUtils {
     return points;
   }
 
-  public static int maxX(Collection<Point> pointMap) {
+  public static long maxX(Collection<Point> pointMap) {
     return pointMap.stream().map(Point::getX).max(Comparator.naturalOrder()).get();
   }
 
-  public static int maxY(Collection<Point> pointMap) {
+  public static long maxY(Collection<Point> pointMap) {
     return pointMap.stream().map(Point::getY).max(Comparator.naturalOrder()).get();
   }
 
-  public static int minX(Collection<Point> pointMap) {
+  public static long minX(Collection<Point> pointMap) {
     return pointMap.stream().map(Point::getX).min(Comparator.naturalOrder()).get();
   }
 
-  public static int minY(Collection<Point> pointMap) {
+  public static long minY(Collection<Point> pointMap) {
     return pointMap.stream().map(Point::getY).min(Comparator.naturalOrder()).get();
   }
 
