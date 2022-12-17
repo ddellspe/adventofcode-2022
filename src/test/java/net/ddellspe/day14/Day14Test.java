@@ -2,7 +2,6 @@ package net.ddellspe.day14;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class Day14Test {
@@ -24,7 +23,6 @@ public class Day14Test {
   }
 
   @Test
-  @Disabled("Test runs for too long")
   public void solutionPart2() {
     System.out.println("Day 14 Part 2 Answer is: " + Day14.part2("input.txt"));
   }

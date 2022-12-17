@@ -3,7 +3,6 @@ package net.ddellspe.day14;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import net.ddellspe.utils.InputUtils;
 import net.ddellspe.utils.Point;
@@ -29,14 +28,35 @@ public class Day14 {
     long yMax = rocks.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get();
     Set<Point> sand = new HashSet<>(rocks);
     Point origin = new Point(500, 0);
-    Point newSand = placeSand(sand, origin, yMax);
+    Point newSand = placeSandPart1(sand, origin, yMax);
     while (newSand != null) {
       sand.add(newSand);
-      newSand = placeSand(sand, origin, yMax);
+      newSand = placeSandPart1(sand, origin, yMax);
     }
     sand.removeAll(rocks);
     //    printPuzzle(rocks, sand);
     return sand.size();
+  }
+
+  public static Point placeSandPart1(Set<Point> sand, Point origin, long yMax) {
+    Point finalPoint = null;
+    long x = origin.getX();
+    long y = origin.getY();
+    while (y <= yMax) {
+      if (!sand.contains(new Point(x, y + 1))) {
+        y++;
+      } else if (!sand.contains(new Point(x - 1, y + 1))) {
+        x--;
+        y++;
+      } else if (!sand.contains(new Point(x + 1, y + 1))) {
+        x++;
+        y++;
+      } else {
+        finalPoint = new Point(x, y);
+        break;
+      }
+    }
+    return finalPoint;
   }
 
   public static long part2(String filename) {
@@ -54,58 +74,52 @@ public class Day14 {
         prevPoint = point;
       }
     }
-    long yMax = rocks.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get() + 2;
-    for (int x = -500; x <= 1500; x++) {
-      rocks.add(new Point(x, yMax));
-    }
+    long yMax = rocks.stream().mapToLong(Point::getY).distinct().max().getAsLong();
     Set<Point> sand = new HashSet<>(rocks);
     Point origin = new Point(500, 0);
-    Point newSand = placeSand(sand, origin, yMax);
+    Point newSand = placeSandPart2(sand, origin, yMax);
     while (newSand != null) {
       sand.add(newSand);
-      newSand = placeSand(sand, origin, yMax);
+      newSand = placeSandPart2(sand, origin, yMax);
     }
     sand.removeAll(rocks);
     //    printPuzzle(rocks, sand);
     return sand.size();
   }
 
-  public static Point placeSand(Set<Point> sand, Point origin, long yMax) {
-    if (origin.getY() >= yMax || sand.contains(origin)) {
-      return null;
-    }
+  public static Point placeSandPart2(Set<Point> sand, Point origin, long yMax) {
+    Point finalPoint = null;
     long x = origin.getX();
-    Optional<Long> lastY =
-        sand.stream()
-            .filter(pt -> pt.getX() == origin.getX() && pt.getY() >= origin.getY())
-            .map(Point::getY)
-            .distinct()
-            .min(Comparator.naturalOrder());
-    if (lastY.isEmpty()) {
-      return null;
-    }
-    long y = lastY.get() - 1;
-    if (sand.contains(new Point(x - 1, y + 1))) {
-      if (sand.contains(new Point(x + 1, y + 1))) {
-        return new Point(x, y);
+    long y = origin.getY();
+    while (y <= yMax + 2) {
+      if (sand.contains(new Point(x, y))) {
+        break;
+      } else if (y == yMax + 1) {
+        finalPoint = new Point(x, y);
+        y++;
+      } else if (!sand.contains(new Point(x, y + 1))) {
+        y++;
+      } else if (!sand.contains(new Point(x - 1, y + 1))) {
+        x--;
+        y++;
+      } else if (!sand.contains(new Point(x + 1, y + 1))) {
+        x++;
+        y++;
       } else {
-        return placeSand(sand, new Point(x + 1, y + 1), yMax);
+        finalPoint = new Point(x, y);
+        break;
       }
-    } else {
-      return placeSand(sand, new Point(x - 1, y + 1), yMax);
     }
+    return finalPoint;
   }
 
   //  public static void printPuzzle(Set<Point> rocks, Set<Point> sand) {
-  //    int xMin = sand.stream().map(Point::getX).distinct().min(Comparator.naturalOrder()).get() -
-  // 3;
-  //    int xMax = sand.stream().map(Point::getX).distinct().max(Comparator.naturalOrder()).get() +
-  // 3;
-  //    int yMin = sand.stream().map(Point::getY).distinct().min(Comparator.naturalOrder()).get();
-  //    int yMax = sand.stream().map(Point::getY).distinct().max(Comparator.naturalOrder()).get() +
-  // 3;
-  //    for (int y = Math.min(yMin, 0); y <= yMax; y++) {
-  //      for (int x = xMin; x <= xMax; x++) {
+  //    long xMin = sand.stream().mapToLong(Point::getX).min().orElseGet(() -> 0L) - 3L;
+  //    long xMax = sand.stream().mapToLong(Point::getX).max().orElseGet(() -> 0L) + 3;
+  //    long yMin = sand.stream().mapToLong(Point::getY).min().orElseGet(() -> 0L);
+  //    long yMax = sand.stream().mapToLong(Point::getY).max().orElseGet(() -> 0L) + 3;
+  //    for (long y = Math.min(yMin, 0); y <= yMax; y++) {
+  //      for (long x = xMin; x <= xMax; x++) {
   //        Point pt = new Point(x, y);
   //        if (rocks.contains(pt)) {
   //          System.out.print("#");
