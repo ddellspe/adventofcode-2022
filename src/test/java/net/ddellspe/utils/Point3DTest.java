@@ -3,6 +3,7 @@ package net.ddellspe.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashSet;
 import java.util.List;
@@ -49,6 +50,29 @@ public class Point3DTest {
     Point3D pt1 = new Point3D(10, 20, 30);
     Point3D pt2 = new Point3D(40, 50, 60);
     assertEquals(90L, pt1.manhattanDistance(pt2));
+  }
+
+  @Test
+  void testCompareTo() {
+    Point3D referencePoint = new Point3D(1, 1, 1);
+    UnsupportedOperationException exception =
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> {
+              referencePoint.compareTo("");
+            });
+    assertEquals("Unable to sort Point3D and java.lang.String", exception.getMessage());
+    assertEquals(1, referencePoint.compareTo(new Point3D(0, 1, 1)));
+    assertEquals(1, referencePoint.compareTo(new Point3D(1, 0, 0)));
+    assertEquals(1, referencePoint.compareTo(new Point3D(1, 0, 1)));
+    assertEquals(1, referencePoint.compareTo(new Point3D(1, 0, 2)));
+    assertEquals(1, referencePoint.compareTo(new Point3D(1, 1, 0)));
+    assertEquals(0, referencePoint.compareTo(new Point3D(1, 1, 1)));
+    assertEquals(-1, referencePoint.compareTo(new Point3D(1, 1, 2)));
+    assertEquals(-1, referencePoint.compareTo(new Point3D(1, 2, 0)));
+    assertEquals(-1, referencePoint.compareTo(new Point3D(1, 2, 1)));
+    assertEquals(-1, referencePoint.compareTo(new Point3D(1, 2, 2)));
+    assertEquals(-1, referencePoint.compareTo(new Point3D(2, 2, 2)));
   }
 
   @Test

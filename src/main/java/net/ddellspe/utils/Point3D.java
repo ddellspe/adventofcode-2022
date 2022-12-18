@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class Point3D {
+public class Point3D implements Comparable {
   private int x;
   private int y;
   private int z;
@@ -15,6 +15,13 @@ public class Point3D {
     this.x = x;
     this.y = y;
     this.z = z;
+  }
+
+  public Point3D(String coordinates) {
+    String[] coords = coordinates.split(",");
+    this.x = Integer.parseInt(coords[0]);
+    this.y = Integer.parseInt(coords[1]);
+    this.z = Integer.parseInt(coords[2]);
   }
 
   @Override
@@ -170,5 +177,27 @@ public class Point3D {
   @Override
   public String toString() {
     return "Point3D [x=" + x + ", y=" + y + ", z=" + z + "]";
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    if (o.getClass() != Point3D.class) {
+      throw new UnsupportedOperationException(
+          "Unable to sort Point3D and " + o.getClass().getName());
+    }
+    Point3D point = (Point3D) o;
+    if (x < point.x) {
+      return -1;
+    } else if (x == point.x) {
+      if (y < point.y) {
+        return -1;
+      } else if (y == point.y) {
+        return Integer.compare(z, point.z);
+      } else {
+        return 1;
+      }
+    } else {
+      return 1;
+    }
   }
 }
