@@ -24,14 +24,14 @@ public class Day18 {
     List<String> lines = InputUtils.stringPerLine(filename, Day18.class);
     Set<Point3D> lavaDroplets = lines.stream().map(Point3D::new).collect(Collectors.toSet());
     Set<Point3D> spotsOfInterest = new HashSet<>();
-    for (int x = lavaDroplets.stream().mapToInt(Point3D::getX).min().getAsInt() - 1;
-        x < lavaDroplets.stream().mapToInt(Point3D::getX).max().getAsInt() + 2;
+    for (long x = lavaDroplets.stream().mapToLong(Point3D::getX).min().getAsLong() - 1;
+        x < lavaDroplets.stream().mapToLong(Point3D::getX).max().getAsLong() + 2;
         x++) {
-      for (int y = lavaDroplets.stream().mapToInt(Point3D::getY).min().getAsInt() - 1;
-          y < lavaDroplets.stream().mapToInt(Point3D::getY).max().getAsInt() + 2;
+      for (long y = lavaDroplets.stream().mapToLong(Point3D::getY).min().getAsLong() - 1;
+          y < lavaDroplets.stream().mapToLong(Point3D::getY).max().getAsLong() + 2;
           y++) {
-        for (int z = lavaDroplets.stream().mapToInt(Point3D::getZ).min().getAsInt() - 1;
-            z < lavaDroplets.stream().mapToInt(Point3D::getZ).max().getAsInt() + 2;
+        for (long z = lavaDroplets.stream().mapToLong(Point3D::getZ).min().getAsLong() - 1;
+            z < lavaDroplets.stream().mapToLong(Point3D::getZ).max().getAsLong() + 2;
             z++) {
           spotsOfInterest.add(new Point3D(x, y, z));
         }

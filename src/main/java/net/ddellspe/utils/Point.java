@@ -87,14 +87,14 @@ public class Point {
 
   public Set<Point> getAllNeighbors() {
     Set<Point> points = new HashSet<>();
-    points.add(new Point(x + 1, y + 1));
-    points.add(new Point(x + 1, y));
-    points.add(new Point(x + 1, y - 1));
-    points.add(new Point(x, y + 1));
-    points.add(new Point(x, y - 1));
-    points.add(new Point(x - 1, y + 1));
-    points.add(new Point(x - 1, y));
-    points.add(new Point(x - 1, y - 1));
+    for (long x = -1; x <= 1; x++) {
+      for (long y = -1; y <= 1; y++) {
+        if (x == 0 && y == 0) {
+          continue;
+        }
+        points.add(new Point(this.x + x, this.y + y));
+      }
+    }
     return points;
   }
 
