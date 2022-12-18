@@ -7,11 +7,11 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Point3D implements Comparable {
-  private int x;
-  private int y;
-  private int z;
+  private long x;
+  private long y;
+  private long z;
 
-  public Point3D(int x, int y, int z) {
+  public Point3D(long x, long y, long z) {
     this.x = x;
     this.y = y;
     this.z = z;
@@ -36,36 +36,36 @@ public class Point3D implements Comparable {
     return x == point.x && y == point.y && z == point.z;
   }
 
-  public int getX() {
+  public long getX() {
     return x;
   }
 
-  public int getY() {
+  public long getY() {
     return y;
   }
 
-  public int getZ() {
+  public long getZ() {
     return z;
   }
 
-  public void setX(int x) {
+  public void setX(long x) {
     this.x = x;
   }
 
-  public void setY(int y) {
+  public void setY(long y) {
     this.y = y;
   }
 
-  public void setZ(int z) {
+  public void setZ(long z) {
     this.z = z;
   }
 
   public List<Point3D> getDifference(Point3D pt) {
     List<Point3D> points = new ArrayList<>();
     for (int i = 0; i < 6; i++) {
-      int x = pt.x;
-      int y = pt.y;
-      int z = pt.z;
+      long x = pt.x;
+      long y = pt.y;
+      long z = pt.z;
       switch (i) {
         case 1:
           y = pt.z;
@@ -102,9 +102,9 @@ public class Point3D implements Comparable {
   }
 
   public Point3D getPointWithDiff(Point3D point, int orientation) {
-    int x = this.x;
-    int y = this.y;
-    int z = this.z;
+    long x = this.x;
+    long y = this.y;
+    long z = this.z;
     switch (orientation / 8) {
       case 1:
         y = this.z;
@@ -142,9 +142,9 @@ public class Point3D implements Comparable {
 
   public Set<Point3D> getDirectNeighbors() {
     Set<Point3D> points = new HashSet<>();
-    for (int x = -1; x <= 1; x++) {
-      for (int y = -1; y <= 1; y++) {
-        for (int z = -1; z <= 1; z++) {
+    for (long x = -1; x <= 1; x++) {
+      for (long y = -1; y <= 1; y++) {
+        for (long z = -1; z <= 1; z++) {
           if (Math.abs(x) + Math.abs(y) + Math.abs(z) == 1) {
             points.add(new Point3D(this.x + x, this.y + y, this.z + z));
           }
@@ -156,9 +156,9 @@ public class Point3D implements Comparable {
 
   public Set<Point3D> getAllNeighbors() {
     Set<Point3D> points = new HashSet<>();
-    for (int x = -1; x <= 1; x++) {
-      for (int y = -1; y <= 1; y++) {
-        for (int z = -1; z <= 1; z++) {
+    for (long x = -1; x <= 1; x++) {
+      for (long y = -1; y <= 1; y++) {
+        for (long z = -1; z <= 1; z++) {
           if (x == 0 && y == 0 && z == 0) {
             continue;
           }
@@ -192,7 +192,7 @@ public class Point3D implements Comparable {
       if (y < point.y) {
         return -1;
       } else if (y == point.y) {
-        return Integer.compare(z, point.z);
+        return Long.compare(z, point.z);
       } else {
         return 1;
       }
