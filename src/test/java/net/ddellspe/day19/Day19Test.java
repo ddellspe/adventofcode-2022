@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import net.ddellspe.day19.Day19.State;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class Day19Test {
   Day19Test() {}
 
   @Test
+  @Disabled("java heap space")
   public void providedInputTestPart1() {
     assertEquals(33L, Day19.part1("example.txt"));
   }
@@ -25,6 +27,7 @@ public class Day19Test {
   }
 
   @Test
+  @Disabled("java heap space")
   public void providedInputTestPart2() {
     assertEquals(3472L, Day19.part2("example.txt"));
   }

@@ -29,20 +29,20 @@ public class Day19 {
     for (String line : lines) {
       Matcher matcher = LINE_PARSER.matcher(line);
       if (matcher.matches()) {
-        Cost oreCost = new Cost(Long.parseLong(matcher.group(2)), null, null, null);
-        Cost clayCost = new Cost(Long.parseLong(matcher.group(3)), null, null, null);
+        Cost oreCost = new Cost(Integer.parseInt(matcher.group(2)), null, null, null);
+        Cost clayCost = new Cost(Integer.parseInt(matcher.group(3)), null, null, null);
         Cost obsidianCost =
             new Cost(
-                Long.parseLong(matcher.group(4)), Long.parseLong(matcher.group(5)), null, null);
+                Integer.parseInt(matcher.group(4)), Integer.parseInt(matcher.group(5)), null, null);
         Cost geodeCost =
             new Cost(
-                Long.parseLong(matcher.group(6)), null, Long.parseLong(matcher.group(7)), null);
+                Integer.parseInt(matcher.group(6)), null, Integer.parseInt(matcher.group(7)), null);
         blueprints.add(new Blueprint(oreCost, clayCost, obsidianCost, geodeCost));
       }
     }
     long total = 0L;
     for (int i = 0; i < blueprints.size(); i++) {
-      long max = simulateBlueprint(blueprints.get(i), 24L);
+      long max = simulateBlueprint(blueprints.get(i), 24);
       total += (max * (i + 1));
     }
     return total;
@@ -54,31 +54,31 @@ public class Day19 {
     for (String line : lines) {
       Matcher matcher = LINE_PARSER.matcher(line);
       if (matcher.matches()) {
-        Cost oreCost = new Cost(Long.parseLong(matcher.group(2)), null, null, null);
-        Cost clayCost = new Cost(Long.parseLong(matcher.group(3)), null, null, null);
+        Cost oreCost = new Cost(Integer.parseInt(matcher.group(2)), null, null, null);
+        Cost clayCost = new Cost(Integer.parseInt(matcher.group(3)), null, null, null);
         Cost obsidianCost =
             new Cost(
-                Long.parseLong(matcher.group(4)), Long.parseLong(matcher.group(5)), null, null);
+                Integer.parseInt(matcher.group(4)), Integer.parseInt(matcher.group(5)), null, null);
         Cost geodeCost =
             new Cost(
-                Long.parseLong(matcher.group(6)), null, Long.parseLong(matcher.group(7)), null);
+                Integer.parseInt(matcher.group(6)), null, Integer.parseInt(matcher.group(7)), null);
         blueprints.add(new Blueprint(oreCost, clayCost, obsidianCost, geodeCost));
       }
     }
     long total = 1L;
     for (int i = 0; i < Math.min(3, blueprints.size()); i++) {
-      long max = simulateBlueprint(blueprints.get(i), 32L);
+      long max = simulateBlueprint(blueprints.get(i), 32);
       total *= max;
     }
     return total;
   }
 
-  public static long simulateBlueprint(Blueprint blueprint, long minutes) {
+  public static long simulateBlueprint(Blueprint blueprint, int minutes) {
     LinkedList<State> queue = new LinkedList<>();
     Set<State> seen = new HashSet<>();
-    Map<Long, Long> best = new HashMap<>();
+    Map<Integer, Integer> best = new HashMap<>();
     queue.add(new State());
-    long maxOreCost =
+    int maxOreCost =
         Math.max(
             blueprint.oreCost.ore,
             Math.max(
@@ -108,7 +108,7 @@ public class Day19 {
 
       best.put(
           updatedState.time,
-          Math.max(best.getOrDefault(updatedState.time, 0L), updatedState.geodes));
+          Math.max(best.getOrDefault(updatedState.time, 0), updatedState.geodes));
 
       if (updatedState.time == minutes) {
         continue;
@@ -132,12 +132,12 @@ public class Day19 {
   }
 
   public static class Cost {
-    Long ore;
-    Long clay;
-    Long obsidian;
-    Long geode;
+    Integer ore;
+    Integer clay;
+    Integer obsidian;
+    Integer geode;
 
-    public Cost(Long ore, Long clay, Long obsidian, Long geode) {
+    public Cost(Integer ore, Integer clay, Integer obsidian, Integer geode) {
       this.ore = ore;
       this.clay = clay;
       this.obsidian = obsidian;
@@ -173,15 +173,15 @@ public class Day19 {
   }
 
   public static class State {
-    long ore;
-    long clay;
-    long obsidian;
-    long geodes;
-    long oreRobots;
-    long clayRobots;
-    long obsidianRobots;
-    long geodeRobots;
-    long time;
+    int ore;
+    int clay;
+    int obsidian;
+    int geodes;
+    int oreRobots;
+    int clayRobots;
+    int obsidianRobots;
+    int geodeRobots;
+    int time;
 
     public State() {
       this.ore = 0;
@@ -196,15 +196,15 @@ public class Day19 {
     }
 
     public State(
-        long ore,
-        long clay,
-        long obsidian,
-        long geodes,
-        long oreRobots,
-        long clayRobots,
-        long obsidianRobots,
-        long geodeRobots,
-        long time) {
+        int ore,
+        int clay,
+        int obsidian,
+        int geodes,
+        int oreRobots,
+        int clayRobots,
+        int obsidianRobots,
+        int geodeRobots,
+        int time) {
       this.ore = ore;
       this.clay = clay;
       this.obsidian = obsidian;
