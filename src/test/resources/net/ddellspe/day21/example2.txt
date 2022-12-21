@@ -1,0 +1,3 @@
+root: left + rite
+left: 10
+rite: 20
