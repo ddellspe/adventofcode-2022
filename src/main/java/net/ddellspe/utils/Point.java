@@ -76,6 +76,38 @@ public class Point {
     return points;
   }
 
+  public Set<Point> getNorthNeighbors() {
+    Set<Point> points = new HashSet<>();
+    points.add(new Point(x - 1, y - 1));
+    points.add(new Point(x, y - 1));
+    points.add(new Point(x + 1, y - 1));
+    return points;
+  }
+
+  public Set<Point> getEastNeighbors() {
+    Set<Point> points = new HashSet<>();
+    points.add(new Point(x + 1, y - 1));
+    points.add(new Point(x + 1, y));
+    points.add(new Point(x + 1, y + 1));
+    return points;
+  }
+
+  public Set<Point> getSouthNeighbors() {
+    Set<Point> points = new HashSet<>();
+    points.add(new Point(x - 1, y + 1));
+    points.add(new Point(x, y + 1));
+    points.add(new Point(x + 1, y + 1));
+    return points;
+  }
+
+  public Set<Point> getWestNeighbors() {
+    Set<Point> points = new HashSet<>();
+    points.add(new Point(x - 1, y - 1));
+    points.add(new Point(x - 1, y));
+    points.add(new Point(x - 1, y + 1));
+    return points;
+  }
+
   public Set<Point> getDirectNeighbors() {
     Set<Point> points = new HashSet<>();
     points.add(new Point(x + 1, y));
