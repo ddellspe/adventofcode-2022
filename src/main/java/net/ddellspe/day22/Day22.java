@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import net.ddellspe.utils.InputUtils;
@@ -176,8 +177,22 @@ public class Day22 {
     Set<Point> right; //   4
     Set<Point> bottom; //  5
     Set<Point> back; //    6
+    Map<Integer, Function<Point, Point>> pointTransform = new HashMap<>();
+    Map<Integer, Integer> directionTransform = new HashMap<>();
     int size = lines.size() < 50 ? 4 : 50;
     if (size == 4) {
+      //      pointTransform.put(1, p -> new Point(p.getX() + 8, p.getY()));
+      pointTransform.put(2, p -> new Point(p.getX() + 4, p.getY() + 4));
+      //      pointTransform.put(3, p -> new Point(p.getX() + 8, p.getY() + 4));
+      //      pointTransform.put(4, p -> new Point(12 + size - p.getY() - 1, p.getX() + 8));
+      //      pointTransform.put(5, p -> new Point(p.getX() + 8, p.getY() + 8));
+      //      pointTransform.put(6, p -> new Point(p.getX(), p.getY() + 4));
+      directionTransform.put(1, 0);
+      directionTransform.put(2, 0);
+      directionTransform.put(3, 0);
+      directionTransform.put(4, 1);
+      directionTransform.put(5, 0);
+      directionTransform.put(6, 0);
       top =
           LongStream.range(0, 4)
               .mapToObj(y -> LongStream.range(8, 12).mapToObj(x -> new Point(x, y)))
@@ -223,6 +238,18 @@ public class Day22 {
                   .collect(Collectors.toSet()),
               size);
     } else {
+      //      pointTransform.put(1, p -> new Point(p.getX() + 50, p.getY()));
+      pointTransform.put(2, p -> new Point(p.getY(), 100 + 50 - p.getX() - 1));
+      //      pointTransform.put(3, p -> new Point(p.getX() + 50, p.getY() + 50));
+      //      pointTransform.put(4, p -> new Point(p.getY() + 100, 50 - p.getX() - 1));
+      //      pointTransform.put(5, p -> new Point(p.getX() + 50, p.getY() + 100));
+      //      pointTransform.put(6, p -> new Point(p.getY(), 150 + 50 - p.getX() - 1));
+      directionTransform.put(1, 0);
+      directionTransform.put(2, -1);
+      directionTransform.put(3, 0);
+      directionTransform.put(4, -1);
+      directionTransform.put(5, 0);
+      directionTransform.put(6, -1);
       top =
           LongStream.range(0, 50)
               .mapToObj(y -> LongStream.range(50, 100).mapToObj(x -> new Point(x, y)))
@@ -425,41 +452,8 @@ public class Day22 {
         moves = moves.substring(idx + 1);
       }
     }
-    if (size == 4) {
-      //      if (faceIdx == 1) {
-      //        currentPoint = new Point(currentPoint.getX() + 8, currentPoint.getY());
-      //      } else if (faceIdx == 2) {
-      currentPoint = new Point(currentPoint.getX() + 4, currentPoint.getY() + 4);
-      //      } else if (faceIdx == 3) {
-      //        currentPoint = new Point(currentPoint.getX() + 8, currentPoint.getY() + 4);
-      //      } else if (faceIdx == 4) {
-      //        currentPoint = new Point(12 + size - currentPoint.getY() - 1, currentPoint.getX() +
-      // 8);
-      //        direction++;
-      //      } else if (faceIdx == 5) {
-      //        currentPoint = new Point(currentPoint.getX() + 8, currentPoint.getY() + 8);
-      //      } else {
-      //        currentPoint = new Point(currentPoint.getX(), currentPoint.getY() + 4);
-      //      }
-    } else {
-      //      if (faceIdx == 1) {
-      //        currentPoint = new Point(currentPoint.getX() + 50, currentPoint.getY());
-      //      } else if (faceIdx == 2) {
-      currentPoint = new Point(currentPoint.getY(), 100 + 50 - currentPoint.getX() - 1);
-      direction--;
-      //      } else if (faceIdx == 3) {
-      //        currentPoint = new Point(currentPoint.getX() + 50, currentPoint.getY() + 50);
-      //      } else if (faceIdx == 4) {
-      //        currentPoint = new Point(100 + currentPoint.getY(), 50 - currentPoint.getX() - 1);
-      //        direction--;
-      //        direction++;
-      //      } else if (faceIdx == 5) {
-      //        currentPoint = new Point(currentPoint.getX() + 50, currentPoint.getY() + 100);
-      //      } else {
-      //        currentPoint = new Point(currentPoint.getY(), 150 + 50 - currentPoint.getX() - 1);
-      //        direction--;
-      //      }
-    }
+    direction += directionTransform.get(faceIdx);
+    currentPoint = pointTransform.get(faceIdx).apply(currentPoint);
     direction = Math.floorMod(direction, 4);
     //    printPuzzle(points, walls, maxX, maxY);
     return (currentPoint.getY() + 1) * 1000 + (currentPoint.getX() + 1) * 4 + direction;
