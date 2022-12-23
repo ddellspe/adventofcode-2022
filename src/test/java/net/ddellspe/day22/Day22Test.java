@@ -19,7 +19,7 @@ public class Day22Test {
 
   @Test
   public void providedInputTestPart2() {
-    assertEquals(0L, Day22.part2("example.txt"));
+    assertEquals(5031L, Day22.part2("example.txt"));
   }
 
   @Test
